@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\sys314\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
+        <dex dex="C:\Users\sys314\Documents\GitHub\CoinThrow1\coinThrow\build\intermediates\pre-dexed\debug\support-v4-18.0.0-ac930add72e27ffdb3b9f76a4515d0cdb27c71e4.jar" />
+    </item>
+    <item
+        jar="C:\Users\sys314\Documents\GitHub\CoinThrow1\coinThrow\build\intermediates\exploded-aar\CoinThrow1\andEngine\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6e9eacb14cb27d06110c65f24937188c957ffa70">
+        <dex dex="C:\Users\sys314\Documents\GitHub\CoinThrow1\coinThrow\build\intermediates\pre-dexed\debug\classes-4808538fc31687db6b081af311e7db53589c5cd4.jar" />
+    </item>
+    <item
+        jar="C:\Users\sys314\Documents\GitHub\CoinThrow-\coinThrow\build\intermediates\exploded-aar\CoinThrow-\andEngine\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5c4bf639cdc3d51881231b41456709c16dcd6845">
+        <dex dex="C:\Users\sys314\Documents\GitHub\CoinThrow-\coinThrow\build\intermediates\pre-dexed\debug\classes-ba227f4e509aafeb00db3500939a7f9569cf3b36.jar" />
+    </item>
+
+</items>
