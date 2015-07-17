@@ -87,11 +87,11 @@ public class InitialScene extends KeyListenScene implements
 			float pTouchAreaLocalY) {
 		// 効果音を再生
 		btnPressedSound.play();
+		KeyListenScene scene = new MainScene(getBaseActivity());
 		switch (pButtonSprite.getTag()) {
 		case INITIAL_START:
 			// リソースの解放
 			ResourceUtil.getInstance(getBaseActivity()).resetAllTexture();
-			KeyListenScene scene = new MainScene(getBaseActivity());
 			// MainSceneへ移動
 			getBaseActivity().getEngine().setScene(scene);
 			// 遷移管理用配列に追加
@@ -100,6 +100,9 @@ public class InitialScene extends KeyListenScene implements
 		case INITIAL_RANKING:
 			break;
 		case INITIAL_RECOMMEND:
+			// ヘルプ呼出し
+			HelpScene helpScene = new HelpScene(getBaseActivity());
+			getBaseActivity().getEngine().setScene(helpScene);
 			break;
 		}
 	}

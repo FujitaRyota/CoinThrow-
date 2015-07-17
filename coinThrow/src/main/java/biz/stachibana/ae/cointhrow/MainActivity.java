@@ -11,8 +11,8 @@ import android.view.KeyEvent;
 
 public class MainActivity extends MultiSceneActivity {
 	// 画面のサイズ。
-	private int CAMERA_WIDTH = 480;
-	private int CAMERA_HEIGHT = 800;
+	private int CAMERA_WIDTH = 480;		// 480
+	private int CAMERA_HEIGHT = 800;		// 800
 
 	public EngineOptions onCreateEngineOptions() {
 		// サイズを指定し描画範囲をインスタンス化
@@ -111,5 +111,12 @@ public class MainActivity extends MultiSceneActivity {
 			return true;
 		}
 		return false;
+	}
+
+	// ひとつ前のシーンを取得
+	public void backToPrevious() {
+		int lastIndex = getSceneArray().size() - 1;
+		Scene lastScene = (Scene) getSceneArray().get(lastIndex);
+		getEngine().setScene(lastScene);
 	}
 }
