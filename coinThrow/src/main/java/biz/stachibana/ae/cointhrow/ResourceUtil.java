@@ -191,4 +191,58 @@ public class ResourceUtil {
 			pow2value *= 2;
 		return pow2value;
 	}
+
+	// ヘルプ用のスプライトの生成。（３枚）
+	public Sprite getHelpSprite(String start, String mid, String end) {
+
+		if (textureRegionPool.containsKey(start)
+				&& textureRegionPool.containsKey(mid)
+				&& textureRegionPool.containsKey(end)) {
+			ButtonSprite s = new ButtonSprite(0, 0,
+					textureRegionPool.get(start),
+					textureRegionPool.get(mid),
+					textureRegionPool.get(end),
+					gameActivity.getVertexBufferObjectManager());
+			s.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+			return s;
+		}
+
+		InputStream is = null;
+		try {
+			is = gameActivity.getResources().getAssets().open("gfx/" + start);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Bitmap bm = BitmapFactory.decodeStream(is);
+
+		// ボタン生成の為のTextureRegion生成。TiledTextureRegionでなく、BuildableBitmapTextureAtlasを利用する。
+		BuildableBitmapTextureAtlas bta = new BuildableBitmapTextureAtlas(
+				gameActivity.getTextureManager(),
+				getTwoPowerSize(bm.getWidth() * 3),
+				getTwoPowerSize(bm.getHeight()));
+
+		ITextureRegion trStart = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(bta, gameActivity, start);
+		ITextureRegion trMid = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(bta, gameActivity, mid);
+		ITextureRegion trEnd = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(bta, gameActivity, end);
+
+		try {
+			bta.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(
+					0, 0, 0));
+			bta.load();
+		} catch (TextureAtlasBuilderException e) {
+			Debug.e(e);
+		}
+
+		textureRegionPool.put(start, trStart);
+		textureRegionPool.put(mid, trMid);
+		textureRegionPool.put(end, trEnd);
+
+		ButtonSprite s = new ButtonSprite(0, 0, trMid,
+				gameActivity.getVertexBufferObjectManager());
+		s.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+		return s;
+	}
 }

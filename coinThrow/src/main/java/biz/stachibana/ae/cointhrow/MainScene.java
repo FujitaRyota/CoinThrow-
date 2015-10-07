@@ -32,6 +32,7 @@ public class MainScene extends KeyListenScene implements IOnSceneTouchListener,
 	private static final int MENU_MENU = 1;
 	private static final int MENU_TWEET = 2;
 	private static final int MENU_RANKING = 3;
+	private static final int HELP_CALL = 1000;
 
 	private AnimatedSprite coin;
 	// ドラッグ開始座標
@@ -136,6 +137,20 @@ public class MainScene extends KeyListenScene implements IOnSceneTouchListener,
 						.getVertexBufferObjectManager());
 		attachChild(highScoreText);
 
+		// ヘルプボタンの追加
+		ButtonSprite helpBtnInGame = getBaseActivity().getResourceUtil()
+				.getButtonSprite("help_btn_back.png",
+						"help_btn_back_p.png");
+		//placeToCenterX(helpBtnInGame, 0);
+		helpBtnInGame.setPosition(getBaseActivity().getEngine().getCamera().getWidth() - 70
+					- helpBtnInGame.getWidth() / 2.0f, 0);
+
+		helpBtnInGame.setTag(HELP_CALL);
+		helpBtnInGame.setOnClickListener(this);
+		attachChild(helpBtnInGame);
+		// ボタンをタップ可能に
+		registerTouchArea(helpBtnInGame);
+
 		// ハイスコアが0の時(初プレイ時)のみヘルプ画面を出す
 		if (SPUtil.getInstance(getBaseActivity()).getHighScore() > 0) {
 			// Sceneのタッチリスナーを登録
@@ -152,7 +167,9 @@ public class MainScene extends KeyListenScene implements IOnSceneTouchListener,
 	// 遊び方画面を出現させる
 	public void showHelp() {
 		instructionSprite = ResourceUtil.getInstance(getBaseActivity())
-				.getSprite("instruction.png");
+				//.getSprite("instruction.png");
+				.getSprite("instruction2.png");
+				//.getSprite("instruction3.png");
 		placeToCenter(instructionSprite);
 		attachChild(instructionSprite);
 
@@ -636,6 +653,12 @@ public class MainScene extends KeyListenScene implements IOnSceneTouchListener,
 			getBaseActivity().startActivity(sendIntent);
 			break;
 		case MENU_RANKING:
+			break;
+
+		case HELP_CALL:
+			// ヘルプ呼出し
+			HelpScene helpScene = new HelpScene(getBaseActivity());
+			getBaseActivity().getEngine().setScene(helpScene);
 			break;
 		}
 	}

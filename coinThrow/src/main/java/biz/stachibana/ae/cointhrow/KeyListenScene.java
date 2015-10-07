@@ -1,6 +1,7 @@
 package biz.stachibana.ae.cointhrow;
 
 import org.andengine.entity.scene.Scene;
+import org.andengine.entity.scene.menu.item.decorator.BaseMenuItemDecorator;
 import org.andengine.entity.sprite.Sprite;
 
 import android.view.KeyEvent;
@@ -49,6 +50,13 @@ public abstract class KeyListenScene extends Scene {
 	public Sprite placeToCenterY(Sprite sp, float x) {
 		sp.setPosition(x, baseActivity.getEngine().getCamera().getHeight()
 				/ 2.0f - sp.getHeight() / 2.0f);
+		return sp;
+	}
+
+	public Sprite placeToButtonY(Sprite parentSP, Sprite sp){
+		placeToCenterX(sp, 0);        //680
+		float sy = parentSP.getY() + parentSP.getHeight() - sp.getHeight();
+		sp.setPosition(sp.getX(), sy);
 		return sp;
 	}
 }
